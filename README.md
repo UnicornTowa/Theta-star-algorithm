@@ -1,6 +1,6 @@
 # Theta-star-algorythm
 
-Any-angle path planning algorythm that works in coordinates. /n
+Any-angle path planning algorythm that works in coordinates. 
 
 ## How to use
 To work with the program you need to edit the main.cpp and make adjustments to it according to your task.
