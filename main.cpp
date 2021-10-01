@@ -1,171 +1,195 @@
-﻿
 #include <iostream>
-#include <vector>
+#include "theta.h"
+
 using namespace std;
 
-struct node_str;
-struct path_str;
-struct node_str {
-	int x;
-	int y;
-	int g_score;
-	int h_score;
-	int total_score;
-	node_str* parent;
-	path_str* neighbour;
-	node_str(int x, int y) : x(x), y(y) {}
-};
-struct vector_node : vector<node_str*> {
-	inline auto bin_search(node_str* s) {
-		return lower_bound(begin(), end(), s, [](const node_str* a, const node_str* b) {
-			return a->total_score < b->total_score;
-		});
-	}
-	inline bool has(node_str* s) {
-		auto it = bin_search(s);
-		return it != end() && *it == s;
-	}
-};
-struct sorted_node : vector_node {
-	inline void remove(node_str* s) {
-		auto it = bin_search(s);
-		if (it != end() && *it == s) erase(it);
-	}
-	inline void add(node_str* s) {
-		auto it = bin_search(s);
-		insert(it, s);
-	}
-};
-struct path_str {
-	node_str* x0;
-	node_str* x1;
-};
+int main() {
 
-vector<node_str> node;
-vector<path_str> path;
-sorted_node open;
-vector_node closed;
-vector<node_str*> reverse_path;
+    point from = { 2,2 }, to = { 17,15 };
+    vector<point> result, walls = {
+            { 0 , 0 },
+            { 0 , 1 },
+            { 0 , 2 },
+            { 0 , 3 },
+            { 0 , 4 },
+            { 0 , 5 },
+            { 0 , 6 },
+            { 0 , 7 },
+            { 0 , 8 },
+            { 0 , 9 },
+            { 0 , 10 },
+            { 0 , 11 },
+            { 0 , 12 },
+            { 0 , 13 },
+            { 0 , 14 },
+            { 0 , 15 },
+            { 0 , 16 },
+            { 0 , 17 },
+            { 0 , 18 },
+            { 0 , 19 },
+            { 1 , 0 },
+            { 1 , 6 },
+            { 1 , 19 },
+            { 2 , 0 },
+            { 2 , 6 },
+            { 2 , 19 },
+            { 3 , 0 },
+            { 3 , 6 },
+            { 3 , 13 },
+            { 3 , 19 },
+            { 4 , 0 },
+            { 4 , 6 },
+            { 4 , 13 },
+            { 4 , 19 },
+            { 5 , 0 },
+            { 5 , 1 },
+            { 5 , 2 },
+            { 5 , 3 },
+            { 5 , 4 },
+            { 5 , 8 },
+            { 5 , 9 },
+            { 5 , 10 },
+            { 5 , 11 },
+            { 5 , 12 },
+            { 5 , 13 },
+            { 5 , 14 },
+            { 5 , 15 },
+            { 5 , 16 },
+            { 5 , 17 },
+            { 5 , 19 },
+            { 6 , 0 },
+            { 6 , 4 },
+            { 6 , 8 },
+            { 6 , 16 },
+            { 6 , 19 },
+            { 7 , 0 },
+            { 7 , 4 },
+            { 7 , 5 },
+            { 7 , 6 },
+            { 7 , 7 },
+            { 7 , 8 },
+            { 7 , 9 },
+            { 7 , 10 },
+            { 7 , 11 },
+            { 7 , 12 },
+            { 7 , 13 },
+            { 7 , 14 },
+            { 7 , 16 },
+            { 7 , 19 },
+            { 8 , 0 },
+            { 8 , 16 },
+            { 8 , 19 },
+            { 9 , 0 },
+            { 9 , 16 },
+            { 9 , 19 },
+            { 10 , 0 },
+            { 10 , 2 },
+            { 10 , 3 },
+            { 10 , 4 },
+            { 10 , 5 },
+            { 10 , 6 },
+            { 10 , 7 },
+            { 10 , 8 },
+            { 10 , 9 },
+            { 10 , 10 },
+            { 10 , 16 },
+            { 10 , 19 },
+            { 11 , 0 },
+            { 11 , 8 },
+            { 11 , 10 },
+            { 11 , 11 },
+            { 11 , 12 },
+            { 11 , 13 },
+            { 11 , 14 },
+            { 11 , 19 },
+            { 12 , 0 },
+            { 12 , 8 },
+            { 12 , 14 },
+            { 12 , 19 },
+            { 13 , 0 },
+            { 13 , 1 },
+            { 13 , 2 },
+            { 13 , 3 },
+            { 13 , 4 },
+            { 13 , 5 },
+            { 13 , 6 },
+            { 13 , 8 },
+            { 13 , 9 },
+            { 13 , 10 },
+            { 13 , 11 },
+            { 13 , 12 },
+            { 13 , 13 },
+            { 13 , 14 },
+            { 13 , 15 },
+            { 13 , 16 },
+            { 13 , 17 },
+            { 13 , 18 },
+            { 13 , 19 },
+            { 14 , 0 },
+            { 14 , 8 },
+            { 14 , 19 },
+            { 15 , 0 },
+            { 15 , 2 },
+            { 15 , 3 },
+            { 15 , 4 },
+            { 15 , 5 },
+            { 15 , 6 },
+            { 15 , 8 },
+            { 15 , 13 },
+            { 15 , 14 },
+            { 15 , 15 },
+            { 15 , 16 },
+            { 15 , 17 },
+            { 15 , 19 },
+            { 16 , 0 },
+            { 16 , 2 },
+            { 16 , 6 },
+            { 15 , 7 },
+            { 16 , 13 },
+            { 16 , 17 },
+            { 16 , 19 },
+            { 17 , 0 },
+            { 17 , 2 },
+            { 17 , 4 },
+            { 17 , 6 },
+            { 17 , 8 },
+            { 17 , 13 },
+            { 17 , 19 },
+            { 18 , 0 },
+            { 18 , 4 },
+            { 18 , 8 },
+            { 18 , 13 },
+            { 18 , 17 },
+            { 18 , 19 },
+            { 19 , 0 },
+            { 19 , 1 },
+            { 19 , 2 },
+            { 19 , 3 },
+            { 19 , 4 },
+            { 19 , 5 },
+            { 19 , 6 },
+            { 19 , 7 },
+            { 19 , 8 },
+            { 19 , 9 },
+            { 19 , 10 },
+            { 19 , 11 },
+            { 19 , 12 },
+            { 19 , 13 },
+            { 19 , 14 },
+            { 19 , 15 },
+            { 19 , 16 },
+            { 19 , 17 },
+            { 19 , 18 },
+            { 19 , 19 }
 
 
-inline int c(node_str* a, node_str* b) {
-	int x = b->x - a->x;
-	int y = b->y - a->y;
-	double cc = x*x + y*y;
-	return sqrt(cc);
-}
+    };
+    theta(from, to, walls, result);
+    print(from, to, walls, result);
 
-inline void prepare(node_str* goal) {
-	qsort(&path[0], path.size(), sizeof(path_str), [](const void* a, const void* b) -> int {
-		return ((path_str*)a)->x0 - ((path_str*)b)->x0;
-	});
+    cout << endl << endl;
 
-	node_str* last = 0;
-	for (path_str& p : path) {
-		node_str* current = p.x0;
-		if (last != current) {
-			last = current;
-			last->neighbour = &p;
-		}
-	}
 
-	for (node_str& n : node)
-		n.h_score = c(&n, goal);
-}
 
-inline void reconstruct_path(node_str* s) {
-	do {
-		reverse_path.push_back(s);
-		s = s->parent;
-	} while (s);
-}
-inline void update_vertex(node_str* s, node_str* neighbour) {
-	bool line_of_sight = false;
-	node_str* parent = s->parent;
-	if (parent) {
-		path_str* p = parent->neighbour;
-		do {
-			if (p->x1 == neighbour) {
-				line_of_sight = true;
-				break;
-			}
-			p++;
-		} while (p->x0 == parent);
-	}
-
-	if (line_of_sight) {
-		int score = parent->g_score + c(parent, neighbour);
-		if (score < neighbour->g_score) {
-			open.remove(neighbour);
-			neighbour->g_score = score;
-			neighbour->total_score = score + neighbour->h_score;
-			neighbour->parent = parent;
-			open.add(neighbour);
-		}
-	}
-	else {
-		int score = s->g_score + c(s, neighbour);
-		if (score < neighbour->g_score) {
-			open.remove(neighbour);
-			neighbour->g_score = score;
-			neighbour->total_score = score + neighbour->h_score;
-			neighbour->parent = s;
-			open.add(neighbour);
-		}
-	}
-}
-static void theta(node_str* start, node_str* goal) {
-	start->g_score = 0;
-	start->parent = 0;
-
-	open.push_back(start);
-
-	do {
-		node_str* s = open.back();
-		open.pop_back();
-		if (s == goal) {
-			reconstruct_path(s);
-			return;
-		}
-		closed.push_back(s);
-
-		path_str* p = s->neighbour;
-		if (p) do {
-			node_str* neighbour = p->x1;
-			if (!closed.has(neighbour)) {
-				if (!open.has(neighbour)) {
-					neighbour->g_score = INT_MAX;
-					neighbour->parent = 0;
-				}
-				update_vertex(s, neighbour);
-			}
-			p++;
-		} while (p->x0 == s);
-	} while (!open.empty());
-}
-
-int main()
-{
-	node.push_back({ 0,500 });
-	node.push_back({ -100,600 });
-	node.push_back({ 300,-800 });
-	node.push_back({ 800,-900 });
-	node.push_back({ 300,600 });
-	node.push_back({ -700,-200 });
-	node.push_back({ -600,0 });
-
-	path.push_back({ &node[1],&node[5] });
-	path.push_back({ &node[3],&node[2] });
-	path.push_back({ &node[3],&node[6] });
-	path.push_back({ &node[3],&node[1] });
-	path.push_back({ &node[2],&node[4] });
-	path.push_back({ &node[0],&node[1] });
-	path.push_back({ &node[5],&node[0] });
-	path.push_back({ &node[1],&node[3] });
-	path.push_back({ &node[4],&node[5] });
-
-	prepare(&node[6]);
-	theta(&node[0], &node[6]);
-
-	return 0;
+    return 0;
 }
