@@ -3,7 +3,7 @@
 Any-angle path planning algorythm that works in coordinates. 
 
 ## How to use
-To work with the program you need to edit the main.cpp and make adjustments to it according to your task.
+To work with the program you need to edit the main.cpp and make adjustments to it according to your task. (connected "@" and "*" = desired path)
 ```cpp
 int main() {
     point from = { X, Y }; // coordinates of start point
