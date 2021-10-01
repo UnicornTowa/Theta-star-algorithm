@@ -1,9 +1,9 @@
 # Theta-star-algorythm
 
-Any-angle path planning algorythm that works in coordinates. 
+Any-angle path planning algorythm that works with cells in the coordinate plane.
 
 ## How to use
-To work with the program you need to edit the main.cpp and make adjustments to it according to your task (connected "@" and "*" = desired path).
+To work with the program you need to edit the main.cpp and make adjustments to it according to your task.
 ```cpp
 int main() {
     point from = { X, Y }; // coordinates of start point
@@ -18,7 +18,7 @@ int main() {
 }
 ```
 ## Program output
-Default program will give you output as a "image" where "@" marks start and target points, "X" marks walls and "*" marks a point where the direction of moving changes. 
+Default program will give you output as a "image" where "@" marks start and target points, "X" marks walls and "*" marks a point where the direction of moving changes  (connected "@" and "*" = desired path). 
 ### Example
 ![alt text](https://raw.githubusercontent.com/UnicornTowa/Theta-star-algorythm/main/output_example.jpg)
 ## Tests (visualisation)
