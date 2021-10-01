@@ -18,7 +18,7 @@ int main() {
 }
 ```
 ## Program output
-Default program will give you output as a "image" where @ marks start and target points, X marks walls and * marks a point where the direction of moving changes. 
+Default program will give you output as a "image" where "@" marks start and target points, "X" marks walls and "*" marks a point where the direction of moving changes. 
 ### Example
 ![alt text](https://raw.githubusercontent.com/UnicornTowa/Theta-star-algorythm/main/output_example.jpg)
 ## Tests (visualisation)
