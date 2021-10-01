@@ -3,8 +3,7 @@
 Any-angle path planning algorythm that works in coordinates. 
 
 ## How to use
-To work with the program you need to edit the main.cpp and make adjustments to it according to your task.\n
-(connected "@" and "*" = desired path)
+To work with the program you need to edit the main.cpp and make adjustments to it according to your task (connected "@" and "*" = desired path).
 ```cpp
 int main() {
     point from = { X, Y }; // coordinates of start point
@@ -29,3 +28,5 @@ Default program will give you output as a "image" where "@" marks start and targ
 ![alt text](https://raw.githubusercontent.com/UnicornTowa/Theta-star-algorythm/c6a5c51703faa64ac84838857b7a54ce62699e3e/test2.svg)
 ##### Test 3
 ![alt text](https://raw.githubusercontent.com/UnicornTowa/Theta-star-algorythm/c6a5c51703faa64ac84838857b7a54ce62699e3e/last.svg)
+
+### End
