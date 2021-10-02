@@ -1,6 +1,6 @@
-# Theta-star-algorythm
+# Theta-star-algorithm
 
-Any-angle path planning algorythm that works with cells in the coordinate plane.
+Any-angle path planning algorithm that works with cells in the coordinate plane.
 
 ## How to use
 To work with the program you need to edit the main.cpp and make adjustments to it according to your task.
