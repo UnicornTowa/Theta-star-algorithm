@@ -1,6 +1,7 @@
 #include <iostream>
-#include <algorithm>
 #include "theta.h"
+#include <math.h>
+
 using namespace std;
 
 constexpr int DistanceStep = 16;
@@ -10,7 +11,7 @@ struct cell : point {
     uint16_t total_score;
     cell* parent;
     cell(short x, short y, uint16_t _g_score, uint16_t _total_score, cell* _parent)
-    : point(x, y)
+            : point(x, y)
     {
         g_score = _g_score;
         total_score = _total_score;
@@ -36,10 +37,6 @@ struct open_vec : close_vec {
         return lower_bound(begin(), end(), s, [](const cell& a, const cell& b) {
             return a.total_score > b.total_score;
         });
-    }
-    inline bool has(cell& s) {
-        auto it = bin_search(s);
-        return it != end() && *it == s;
     }
     inline void remove(cell& s) {
         auto it = bin_search(s);
@@ -148,7 +145,8 @@ void theta(point p_start, point p_goal, vector<point>& wall, vector<point>& path
     move_wall(closed, wall);
 
     uint16_t d = distance(p_start, p_goal);
-    cell start = { p_start.x,p_start.y, 0, d, closed.end()._Ptr };
+    auto temp = closed.end();
+    cell start = { p_start.x,p_start.y, 0, d, &*closed.end() };
 
     open_vec opened;
     opened.push_back(start);
@@ -171,7 +169,7 @@ void theta(point p_start, point p_goal, vector<point>& wall, vector<point>& path
 }
 
 void print(point p_start, point p_goal, std::vector<point>& walls, std::vector<point>& path) {
-    int x0 = INT_MAX, x1 = INT_MIN, y0 = INT_MAX, y1 = INT_MIN;
+    int x0 = 2147483647, x1 = -2147483648, y0 = 2147483647, y1 = -2147483648;
     for (point& p : walls) {
         if (x0 > p.x) x0 = p.x;
         if (x1 < p.x) x1 = p.x;
