@@ -1,4 +1,4 @@
-# Theta-star-algorithm
+# Theta-star-algorithm on C++20
 
 Any-angle path planning algorithm that works with cells in the coordinate plane.
 
