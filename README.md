@@ -1,7 +1,7 @@
 # Theta-star-algorithm on C++20
 
 Any-angle path planning algorithm that works with cells in the coordinate plane.
-
+#### Prepared by first-year students of Saint Petersburg State University Arzha Anton and Mihaylov Ivan
 ## How to use
 To work with the program you need to edit the main.cpp and make adjustments to it according to your task.
 ```cpp
